@@ -1,16 +1,38 @@
 #include "EjerciciosComienzo.h"
 
 int suma(int a, int b) {
- 	// IMPLEMENTAR SOLUCION
     return a + b;
 }
 
 void tablaDel(unsigned int tablaDel, unsigned int desde, unsigned int hasta) {
- 	// IMPLEMENTAR SOLUCION
+
+	for (unsigned int i = desde; i <= hasta; i++) {
+
+		cout << i << '*' << tablaDel << '=' << i * tablaDel;
+
+		if (i != hasta) {
+			cout << ';';
+		}
+	}
 }
 
 void simplificar(int n, int d) {
-	// IMPLEMENTAR SOLUCION
+	if (d != 0) {
+		//sape
+		int minValAbs = abs(n) > abs(d) ? abs(d) : abs(n);
+
+		for (minValAbs; minValAbs > 1; minValAbs--) {
+			if (n % minValAbs == 0 && d % minValAbs == 0) {
+				n = n / minValAbs;
+				d = d / minValAbs;
+			}
+		}
+
+		cout << n << '/' << d;
+	}
+	else {
+		cout << n << '/' << d;
+	}
 }
 
 int ocurrencias123Repetidos(int* vector, int largo) {
