@@ -18,14 +18,23 @@ void tablaDel(unsigned int tablaDel, unsigned int desde, unsigned int hasta) {
 
 void simplificar(int n, int d) {
 	if (d != 0) {
-		//sape
-		int minValAbs = abs(n) > abs(d) ? abs(d) : abs(n);
+
+		bool signoNegativo = n * d < 0 ? true : false;
+
+		n = abs(n);
+		d = abs(d);
+
+		int minValAbs = n > d ? n : d;
 
 		for (minValAbs; minValAbs > 1; minValAbs--) {
 			if (n % minValAbs == 0 && d % minValAbs == 0) {
 				n = n / minValAbs;
 				d = d / minValAbs;
 			}
+		}
+		
+		if (signoNegativo) {
+			cout << '-';
 		}
 
 		cout << n << '/' << d;
