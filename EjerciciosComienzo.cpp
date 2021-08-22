@@ -17,31 +17,24 @@ void tablaDel(unsigned int tablaDel, unsigned int desde, unsigned int hasta) {
 }
 
 void simplificar(int n, int d) {
-	if (d != 0) {
 
-		bool signoNegativo = n * d < 0 ? true : false;
+	if (n* d < 0) {
+		cout << '-';
+	}
 
-		n = abs(n);
-		d = abs(d);
+	n = abs(n);
+	d = abs(d);
 
-		int minValAbs = n > d ? n : d;
+	int minValAbs = n > d ? n : d;
 
-		for (minValAbs; minValAbs > 1; minValAbs--) {
-			if (n % minValAbs == 0 && d % minValAbs == 0) {
-				n = n / minValAbs;
+	for (minValAbs; minValAbs > 1; minValAbs--) {
+		if (n % minValAbs == 0 && d % minValAbs == 0) {
+			n = n / minValAbs;
 				d = d / minValAbs;
-			}
 		}
-		
-		if (signoNegativo) {
-			cout << '-';
-		}
+	}
 
-		cout << n << '/' << d;
-	}
-	else {
-		cout << n << '/' << d;
-	}
+	cout << n << '/' << d;
 }
 
 int ocurrencias123Repetidos(int* vector, int largo) {
