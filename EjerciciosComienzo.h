@@ -5,6 +5,7 @@ using namespace std;
 #include "Definiciones.h"
 #include "FuncAux.h"
 
+
 // ----- FUNCIONES AUXILIARES -----
 
 /*

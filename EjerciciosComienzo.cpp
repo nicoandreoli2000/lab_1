@@ -1,7 +1,6 @@
 #include "EjerciciosComienzo.h"
 
-
-//Funciones auxiliares
+// ----- Funciones auxiliares -----
 
 unsigned int obtenerLargo(char* str) {
 	unsigned int largo = 0;
@@ -22,18 +21,20 @@ char* copiarString(char* str) {
 }
 
 char toUpperOrLower(char letra, bool toUpper) {
-	int dif = 'a' - 'A';
+	const unsigned int dif = 'a' - 'A';
 	
 	if (toUpper) {
-
+		letra -= dif;
 	}
 	else {
-
+		letra += dif;
 	}
+
+	return letra;
 }
 
 
-//Ejercicios
+// ----- Ejercicios -----
 
 int suma(int a, int b) {
     return a + b;
