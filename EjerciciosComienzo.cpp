@@ -159,8 +159,27 @@ char **ordenarVecStrings(char **vecStr, int largoVecStr)
 }
 
 int* intercalarVector(int* v1, int* v2, int l1, int l2){
-	// IMPLEMENTAR SOLUCIO
-	return NULL;
+
+	unsigned int p1 = 0;
+	unsigned int p2 = 0;
+	unsigned int largo = l1 + l2;
+
+	int* vec = largo != 0 ? new int[largo] : NULL;
+
+	while (p1 + p2 < largo) {
+
+		if (((p1 < l1) && (p2 < l2) && (v1[p1] <= v2[p2])) || (p2 == l2)) {
+			vec[p1 + p2] = v1[p1];
+			p1++;
+		}
+		else {
+			vec[p1 + p2] = v2[p2];
+			p2++;
+		}
+		
+	}
+
+	return vec;
 }
 
 bool subconjuntoVector(int* v1, int* v2, int l1, int l2)
