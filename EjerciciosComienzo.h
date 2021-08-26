@@ -5,12 +5,36 @@ using namespace std;
 #include "Definiciones.h"
 #include "FuncAux.h"
 
+// ----- FUNCIONES AUXILIARES -----
+
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: recibe un string
+POS: retorna el largo del string
+*/
+unsigned int obtenerLargo(char* str);
+
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: recibe un string
+POS: retorna una copia del string
+*/
+char* copiarString(char* str);
+
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: recibe un char y un bool
+POS: retorna el char en mayúscula o minúscula dependiendo del bool
+*/
+char toUpperOrLower(char letra, bool toUpper);
+
+
+// ----- EJERCICIOS -----
 
 /*	
  *	EJERCICIO OPCIONAL
-	Problema A+B
-	Pre:
-	Pos: Retorna la suma de a+b
+	PRE: recibe dos números enteros
+	POS: retorna la suma de dichos números
 */
 int suma(int a, int b);
 

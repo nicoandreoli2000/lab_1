@@ -1,5 +1,40 @@
 #include "EjerciciosComienzo.h"
 
+
+//Funciones auxiliares
+
+unsigned int obtenerLargo(char* str) {
+	unsigned int largo = 0;
+
+	while (str[largo] != '\0') {
+		largo++;
+	}
+
+	return largo;
+}
+
+char* copiarString(char* str) {
+	int largo = obtenerLargo(str);
+	char* copia = new char[largo + 1];
+	copia[largo] = '\0';
+
+	return copia;
+}
+
+char toUpperOrLower(char letra, bool toUpper) {
+	int dif = 'a' - 'A';
+	
+	if (toUpper) {
+
+	}
+	else {
+
+	}
+}
+
+
+//Ejercicios
+
 int suma(int a, int b) {
     return a + b;
 }
@@ -92,37 +127,9 @@ void ordenarVecInt(int *vec, int largoVec) {
 	}
 }
 
-unsigned int obtenerLargo(char* s) {
-	unsigned int largo = 0;
+char* invertirCase(char* str) {
 
-	while (s[largo] != '\0') {
-		largo++;
-	}
-
-	return largo;
-}
-
-char* copiarString(char* s) {
-	int largo = obtenerLargo(s);
-	char* copia = new char[largo + 1];
-	copia[largo] = '\0';
-
-	return copia;
-}
-
-char* invertirCase(char* str){
-
-	//Es minuscula?
-	if (str[0] >= 'a' && str[0] <= 'z') {
-	}
-
-	// Es mayuscula?
-	if (str[0] >= 'A' && str[0] <= 'Z') {
-
-		//Pasar a minuscula, pero ojo no modificar original, modificar copia
-
-		str[0] += 'a' - 'A';
-	}
+	
 
 	// IMPLEMENTAR SOLUCION
 	return NULL;
