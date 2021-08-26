@@ -1,50 +1,157 @@
 #include "EjerciciosComienzo.h"
 
+// ----- Funciones auxiliares -----
+
+unsigned int obtenerLargo(char* str) {
+	unsigned int largo = 0;
+
+	while (str[largo] != '\0') {
+		largo++;
+	}
+
+	return largo;
+}
+
+char* copiarString(char* str) {
+	const int largo = obtenerLargo(str);
+	char* copia = new char[largo + 1];
+	copia[largo] = '\0';
+
+	for (int i = 0; i < largo; i++) {
+		copia[i] = str[i];
+	}
+
+	return copia;
+}
+
+// ----- Ejercicios -----
+
 int suma(int a, int b) {
- 	// IMPLEMENTAR SOLUCION
     return a + b;
 }
 
 void tablaDel(unsigned int tablaDel, unsigned int desde, unsigned int hasta) {
- 	// IMPLEMENTAR SOLUCION
+
+	for (unsigned int i = desde; i <= hasta; i++) {
+
+		cout << i << '*' << tablaDel << '=' << i * tablaDel;
+
+		if (i != hasta) {
+			cout << ';';
+		}
+	}
 }
 
 void simplificar(int n, int d) {
-	// IMPLEMENTAR SOLUCION
+
+	if (n* d < 0) {
+		cout << '-';
+	}
+
+	n = abs(n);
+	d = abs(d);
+
+	int minValAbs = n > d ? n : d;
+
+	for (minValAbs; minValAbs > 1; minValAbs--) {
+		if (n % minValAbs == 0 && d % minValAbs == 0) {
+			n = n / minValAbs;
+				d = d / minValAbs;
+		}
+	}
+
+	cout << n << '/' << d;
 }
 
 int ocurrencias123Repetidos(int* vector, int largo) {
-	// IMPLEMENTAR SOLUCION
-	return 0;
+
+	int numeroEsperado = 1;
+	int cantidadSecuencias = 0;
+
+	for (int i = 0; i < largo; i++) {
+
+		if (vector[i] == numeroEsperado) {
+			numeroEsperado += 1;
+		}
+		else if (vector[i] != numeroEsperado - 1) {
+			numeroEsperado = 1;
+		}
+
+		if (numeroEsperado == 4) {
+			numeroEsperado = 1;
+			cantidadSecuencias += 1;
+		}
+	}
+
+	return cantidadSecuencias;
 }
 
 int maximoNumero(unsigned int n) {
-	// IMPLEMENTAR SOLUCION
-    return 0;
+	int max = INT_MIN;
+	int aux;
+	
+	for (int i = 0; i < n; i++) {
+
+		cin >> aux;
+		
+		if (aux > max) {
+			max = aux;
+		}
+	}
+
+    return max;
 }
 
 void ordenarVecInt(int *vec, int largoVec) {
-	// IMPLEMENTAR SOLUCION
+	int aux;
+
+	for (int i = 0; i < largoVec - 1; i++) {
+		
+		for (int j = i + 1; j < largoVec; j++) {
+
+			if (vec[j] < vec[i]) {
+				aux = vec[i];
+				vec[i] = vec[j];
+				vec[j] = aux;
+			}
+		}
+	}
 }
 
+char* invertirCase(char* str) {
 
-char* invertirCase(char* str)
-{
-	// IMPLEMENTAR SOLUCION
-	return NULL;
+	char* copia = copiarString(str);
+
+	const unsigned int largo = obtenerLargo(str);
+	const unsigned int dif = 'a' - 'A';
+
+	for (int i = 0; i < largo; i++) {
+
+		if (copia[i] >= 'A' && copia[i] <= 'Z') {
+			copia[i] += dif;
+		}
+		else if (copia[i] >= 'a' && copia[i] <= 'z') {
+			copia[i] -= dif;
+		}
+	}
+
+	return copia;
 }
 
+//NO
 int islas(char** mapa, int col, int fil){
 	// IMPLEMENTAR SOLUCION
     return 0;
 }
 
+//NO
 unsigned int ocurrenciasSubstring(char **vecStr, int largoVecStr, char *substr)
 {
 	// IMPLEMENTAR SOLUCION
     return 0;
 }
 
+//NO
 char **ordenarVecStrings(char **vecStr, int largoVecStr)
 {
 	// IMPLEMENTAR SOLUCION

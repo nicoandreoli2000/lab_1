@@ -6,11 +6,29 @@ using namespace std;
 #include "FuncAux.h"
 
 
+// ----- FUNCIONES AUXILIARES -----
+
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: recibe un string
+POS: retorna el largo del string sin contar el caracter \0
+*/
+unsigned int obtenerLargo(char* str);
+
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: recibe un string
+POS: retorna una copia del string
+*/
+char* copiarString(char* str);
+
+
+// ----- EJERCICIOS -----
+
 /*	
  *	EJERCICIO OPCIONAL
-	Problema A+B
-	Pre:
-	Pos: Retorna la suma de a+b
+	PRE: recibe dos números enteros
+	POS: retorna la suma de dichos números
 */
 int suma(int a, int b);
 
