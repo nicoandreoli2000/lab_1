@@ -13,26 +13,16 @@ unsigned int obtenerLargo(char* str) {
 }
 
 char* copiarString(char* str) {
-	int largo = obtenerLargo(str);
+	const int largo = obtenerLargo(str);
 	char* copia = new char[largo + 1];
 	copia[largo] = '\0';
 
+	for (int i = 0; i < largo; i++) {
+		copia[i] = str[i];
+	}
+
 	return copia;
 }
-
-char toUpperOrLower(char letra, bool toUpper) {
-	const unsigned int dif = 'a' - 'A';
-	
-	if (toUpper) {
-		letra -= dif;
-	}
-	else {
-		letra += dif;
-	}
-
-	return letra;
-}
-
 
 // ----- Ejercicios -----
 
@@ -130,23 +120,38 @@ void ordenarVecInt(int *vec, int largoVec) {
 
 char* invertirCase(char* str) {
 
-	
+	char* copia = copiarString(str);
 
-	// IMPLEMENTAR SOLUCION
-	return NULL;
+	const unsigned int largo = obtenerLargo(str);
+	const unsigned int dif = 'a' - 'A';
+
+	for (int i = 0; i < largo; i++) {
+
+		if (copia[i] >= 'A' && copia[i] <= 'Z') {
+			copia[i] += dif;
+		}
+		else if (copia[i] >= 'a' && copia[i] <= 'z') {
+			copia[i] -= dif;
+		}
+	}
+
+	return copia;
 }
 
+//NO
 int islas(char** mapa, int col, int fil){
 	// IMPLEMENTAR SOLUCION
     return 0;
 }
 
+//NO
 unsigned int ocurrenciasSubstring(char **vecStr, int largoVecStr, char *substr)
 {
 	// IMPLEMENTAR SOLUCION
     return 0;
 }
 
+//NO
 char **ordenarVecStrings(char **vecStr, int largoVecStr)
 {
 	// IMPLEMENTAR SOLUCION

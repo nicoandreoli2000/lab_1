@@ -11,7 +11,7 @@ using namespace std;
 /*
  *  FUNCIÓN AUXILIAR
 PRE: recibe un string
-POS: retorna el largo del string
+POS: retorna el largo del string sin contar el caracter \0
 */
 unsigned int obtenerLargo(char* str);
 
@@ -21,13 +21,6 @@ PRE: recibe un string
 POS: retorna una copia del string
 */
 char* copiarString(char* str);
-
-/*
- *  FUNCIÓN AUXILIAR
-PRE: recibe un char y un bool
-POS: retorna el char en mayúscula o minúscula dependiendo del bool
-*/
-char toUpperOrLower(char letra, bool toUpper);
 
 
 // ----- EJERCICIOS -----
