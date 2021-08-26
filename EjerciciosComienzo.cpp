@@ -159,7 +159,7 @@ char **ordenarVecStrings(char **vecStr, int largoVecStr)
 }
 
 int* intercalarVector(int* v1, int* v2, int l1, int l2){
-	// IMPLEMENTAR SOLUCION
+	// IMPLEMENTAR SOLUCIO
 	return NULL;
 }
 
