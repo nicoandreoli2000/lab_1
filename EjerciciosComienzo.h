@@ -27,8 +27,8 @@ char* copiarString(char* str);
 
 /*	
  *	EJERCICIO OPCIONAL
-	PRE: recibe dos números enteros
-	POS: retorna la suma de dichos números
+PRE: recibe dos números enteros
+POS: retorna la suma de dichos números
 */
 int suma(int a, int b);
 

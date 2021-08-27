@@ -13,7 +13,7 @@ unsigned int obtenerLargo(char* str) {
 }
 
 char* copiarString(char* str) {
-	const int largo = obtenerLargo(str);
+	unsigned int largo = obtenerLargo(str);
 	char* copia = new char[largo + 1];
 	copia[largo] = '\0';
 
@@ -32,11 +32,11 @@ int suma(int a, int b) {
 
 void tablaDel(unsigned int tablaDel, unsigned int desde, unsigned int hasta) {
 
-	for (unsigned int i = desde; i <= hasta; i++) {
+	for (desde; desde <= hasta; desde++) {
 
-		cout << i << '*' << tablaDel << '=' << i * tablaDel;
+		cout << desde << '*' << tablaDel << '=' << desde * tablaDel;
 
-		if (i != hasta) {
+		if (desde != hasta) {
 			cout << ';';
 		}
 	}
@@ -56,7 +56,7 @@ void simplificar(int n, int d) {
 	for (minValAbs; minValAbs > 1; minValAbs--) {
 		if (n % minValAbs == 0 && d % minValAbs == 0) {
 			n = n / minValAbs;
-				d = d / minValAbs;
+			d = d / minValAbs;
 		}
 	}
 
@@ -65,10 +65,10 @@ void simplificar(int n, int d) {
 
 int ocurrencias123Repetidos(int* vector, int largo) {
 
-	int numeroEsperado = 1;
-	int cantidadSecuencias = 0;
+	unsigned int numeroEsperado = 1;
+	unsigned int cantidadSecuencias = 0;
 
-	for (int i = 0; i < largo; i++) {
+	for (unsigned int i = 0; i < largo; i++) {
 
 		if (vector[i] == numeroEsperado) {
 			numeroEsperado += 1;
@@ -122,8 +122,8 @@ char* invertirCase(char* str) {
 
 	char* copia = copiarString(str);
 
-	const unsigned int largo = obtenerLargo(str);
-	const unsigned int dif = 'a' - 'A';
+	unsigned int largo = obtenerLargo(str);
+	unsigned int dif = 'a' - 'A';
 
 	for (int i = 0; i < largo; i++) {
 
