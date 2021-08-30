@@ -22,6 +22,13 @@ POS: retorna una copia del string
 */
 char* copiarString(char* str);
 
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: recibe un string y un substring
+POS: retorna true si el substring dado se encuentra dentro del string principal y false en caso contrario
+*/
+bool seEncuentra(char* str, char* substr);
+
 
 // ----- EJERCICIOS -----
 

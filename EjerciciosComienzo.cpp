@@ -24,6 +24,28 @@ char* copiarString(char* str) {
 	return copia;
 }
 
+bool seEncuentra(char* str, char* substr) {
+	unsigned int l1 = obtenerLargo(str);
+	unsigned int l2 = obtenerLargo(substr);
+	bool esSubstring = false;
+	unsigned int aux;
+
+	for (unsigned int i = 0; i < l1 && !esSubstring; i++) {
+
+		esSubstring = true;
+		aux = i;
+
+		for (unsigned int j = 0; j < l2 && esSubstring; j++) {
+			
+			esSubstring = str[aux] == substr[j];
+			aux++;
+		}
+
+	}
+
+	return esSubstring;
+}
+
 // ----- Ejercicios -----
 
 int suma(int a, int b) {
@@ -138,20 +160,26 @@ char* invertirCase(char* str) {
 	return copia;
 }
 
-//NO
 int islas(char** mapa, int col, int fil){
 	// IMPLEMENTAR SOLUCION
     return 0;
 }
 
-//NO
 unsigned int ocurrenciasSubstring(char **vecStr, int largoVecStr, char *substr)
 {
-	// IMPLEMENTAR SOLUCION
-    return 0;
+	unsigned int contador = 0;
+	unsigned int largoSubstr = obtenerLargo(substr);
+	
+	for (int i = 0; i < largoVecStr; i++) {
+
+		if (seEncuentra(vecStr[i], substr)) {
+			contador++;
+		}
+	}
+
+    return contador;
 }
 
-//NO
 char **ordenarVecStrings(char **vecStr, int largoVecStr)
 {
 	// IMPLEMENTAR SOLUCION
