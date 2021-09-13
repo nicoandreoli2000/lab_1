@@ -13,7 +13,7 @@ unsigned int obtenerLargo(char* str) {
 }
 
 char* copiarString(char* str) {
-	unsigned int largo = obtenerLargo(str);
+	int largo = obtenerLargo(str);
 	char* copia = new char[largo + 1];
 	copia[largo] = '\0';
 
@@ -128,7 +128,7 @@ int ocurrencias123Repetidos(int* vector, int largo) {
 	unsigned int numeroEsperado = 1;
 	unsigned int cantidadSecuencias = 0;
 
-	for (unsigned int i = 0; i < largo; i++) {
+	for (int i = 0; i < largo; i++) {
 
 		if (vector[i] == numeroEsperado) {
 			numeroEsperado += 1;
@@ -182,7 +182,7 @@ char* invertirCase(char* str) {
 
 	char* copia = copiarString(str);
 
-	unsigned int largo = obtenerLargo(str);
+	int largo = obtenerLargo(str);
 	unsigned int dif = 'a' - 'A';
 
 	for (int i = 0; i < largo; i++) {
@@ -238,9 +238,9 @@ bool compararStrings(char* str1, char* str2) {
 
 	bool unoMayorQueDos = true;
 	bool stop = false;
-	unsigned int i = 0;
+	int largoMin = obtenerLargo(str1) > obtenerLargo(str2) ? obtenerLargo(str2) : obtenerLargo(str1);
 
-	for (i = 0; !stop && str1[i] != '/0' && str2[i] != '/0'; i++) {
+	for (int i = 0; !stop && i < largoMin; i++) {
 		if (str1[i] - str2[i] > 0) {
 			unoMayorQueDos = false;
 			stop = true;
@@ -254,36 +254,43 @@ bool compararStrings(char* str1, char* str2) {
 		return unoMayorQueDos;
 	}
 	else {
-		if (str1[i] == '/0') {
+		if (largoMin == obtenerLargo(str1)) {
 			return true;
 		}
 		else {
 			return false;
 		}
 	}
+	return false;
 
 	assert(false);
 }
 
 char** ordenarVecStrings(char** vecStr, int largoVecStr)
 {
-	/*for (unsigned int i = 0; i < largoVecStr; i++) {
-		for (unsigned int j = i + 1; i < largoVecStr; j++) {
-			if (compararStrings(vecStr[i], vecStr[j])) {
-				char* aux = vecStr[i];
-				vecStr[i] = vecStr[j];
-				vecStr[j] = aux;
+	char** vec = new char*[largoVecStr];
+
+	for (int i = 0; i < largoVecStr; i++) {
+		vec[i] = copiarString(vecStr[i]);
+	}
+
+	for (int i = 0; i < largoVecStr; i++) {
+		for (int j = i + 1; j < largoVecStr; j++) {
+			if (compararStrings(vec[j], vec[i])) {
+				char* aux = vec[i];
+				vec[i] = vec[j];
+				vec[j] = aux;
 			}
 		}
-	}*/
-	return NULL;
+	}
+	return vec;
 }
 
 int* intercalarVector(int* v1, int* v2, int l1, int l2) {
 
-	unsigned int p1 = 0;
-	unsigned int p2 = 0;
-	unsigned int largo = l1 + l2;
+	int p1 = 0;
+	int p2 = 0;
+	int largo = l1 + l2;
 
 	int* vec = largo != 0 ? new int[largo] : NULL;
 
@@ -320,7 +327,19 @@ bool subconjuntoVector(int* v1, int* v2, int l1, int l2)
 
 char** splitStr(char* str, char separador, int& largoRet)
 {
-	// IMPLEMENTAR SOLUCION
+	/*int largo = obtenerLargo(str);
+	unsigned int cont = 0;
+	for (int i = 0; i < largo; i++) {
+		if (str[i] == separador) {
+			cont++;
+		}
+	}
+	largoRet = cont;
+
+	char* separadorString = &separador;
+	char* ptx = strtok(str, separadorString);
+
+	cout << endl << ptx << endl;*/
 	return NULL;
 }
 
