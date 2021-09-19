@@ -23,6 +23,13 @@ void agregarPpio(NodoLista*& l, int dato);
 
 /*
  *  FUNCIÓN AUXILIAR
+PRE: Recibe una lista por referencia.
+POS: Borra el último elemento de la lista, si la lista es NULL no tiene efecto.
+*/
+void borrarFinal(NodoLista*& l);
+
+/*
+ *  FUNCIÓN AUXILIAR
 PRE: Recibe una lista.
 POS: Devuelve una copia de la lista sin compartir memoria con la recibida.
 */
