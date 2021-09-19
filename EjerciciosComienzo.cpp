@@ -13,7 +13,7 @@ unsigned int obtenerLargo(char* str) {
 }
 
 char* copiarString(char* str) {
-	const int largo = obtenerLargo(str);
+	int largo = obtenerLargo(str);
 	char* copia = new char[largo + 1];
 	copia[largo] = '\0';
 
@@ -24,19 +24,79 @@ char* copiarString(char* str) {
 	return copia;
 }
 
+void borrarIsla(char** mapa, int col, int fil, int colMax, int filMax) {
+
+	if (mapa[col][fil] != 'T') {
+		return;
+	}
+
+	mapa[col][fil] = 'S';
+
+	//Horizontales y verticales
+	if (col + 1 < colMax) {
+		borrarIsla(mapa, col + 1, fil, colMax, filMax);
+	}
+	if (col - 1 > -1) {
+		borrarIsla(mapa, col - 1, fil, colMax, filMax);
+	}
+	if (fil + 1 < filMax) {
+		borrarIsla(mapa, col, fil + 1, colMax, filMax);
+	}
+	if (fil - 1 > -1) {
+		borrarIsla(mapa, col, fil - 1, colMax, filMax);
+	}
+
+	//Diagonales
+	if (col + 1 < colMax && fil + 1 < filMax) {
+		borrarIsla(mapa, col + 1, fil + 1, colMax, filMax);
+	}
+	if (col - 1 > -1 && fil + 1 < filMax) {
+		borrarIsla(mapa, col - 1, fil + 1, colMax, filMax);
+	}
+	if (col + 1 < colMax && fil - 1 > -1) {
+		borrarIsla(mapa, col + 1, fil - 1, colMax, filMax);
+	}
+	if (col - 1 > -1 && fil - 1 > -1) {
+		borrarIsla(mapa, col - 1, fil - 1, colMax, filMax);
+	}
+
+}
+
+bool seEncuentra(char* str, char* substr) {
+	unsigned int l1 = obtenerLargo(str);
+	unsigned int l2 = obtenerLargo(substr);
+	bool esSubstring = false;
+	unsigned int aux;
+
+	for (unsigned int i = 0; i < l1 && !esSubstring; i++) {
+
+		esSubstring = true;
+		aux = i;
+
+		for (unsigned int j = 0; j < l2 && esSubstring; j++) {
+
+			esSubstring = str[aux] == substr[j];
+			aux++;
+		}
+
+	}
+
+	return esSubstring;
+}
+
 // ----- Ejercicios -----
 
 int suma(int a, int b) {
-    return a + b;
+	return a + b;
 }
 
 void tablaDel(unsigned int tablaDel, unsigned int desde, unsigned int hasta) {
 
-	for (unsigned int i = desde; i <= hasta; i++) {
+	for (desde; desde <= hasta; desde++) {
 
-		cout << i << '*' << tablaDel << '=' << i * tablaDel;
+		cout << desde << '*' << tablaDel << '=' << desde * tablaDel;
 
-		if (i != hasta) {
+		if (desde != hasta) {
 			cout << ';';
 		}
 	}
@@ -56,7 +116,7 @@ void simplificar(int n, int d) {
 	for (minValAbs; minValAbs > 1; minValAbs--) {
 		if (n % minValAbs == 0 && d % minValAbs == 0) {
 			n = n / minValAbs;
-				d = d / minValAbs;
+			d = d / minValAbs;
 		}
 	}
 
@@ -65,8 +125,8 @@ void simplificar(int n, int d) {
 
 int ocurrencias123Repetidos(int* vector, int largo) {
 
-	int numeroEsperado = 1;
-	int cantidadSecuencias = 0;
+	unsigned int numeroEsperado = 1;
+	unsigned int cantidadSecuencias = 0;
 
 	for (int i = 0; i < largo; i++) {
 
@@ -89,24 +149,24 @@ int ocurrencias123Repetidos(int* vector, int largo) {
 int maximoNumero(unsigned int n) {
 	int max = INT_MIN;
 	int aux;
-	
+
 	for (int i = 0; i < n; i++) {
 
 		cin >> aux;
-		
+
 		if (aux > max) {
 			max = aux;
 		}
 	}
 
-    return max;
+	return max;
 }
 
-void ordenarVecInt(int *vec, int largoVec) {
+void ordenarVecInt(int* vec, int largoVec) {
 	int aux;
 
 	for (int i = 0; i < largoVec - 1; i++) {
-		
+
 		for (int j = i + 1; j < largoVec; j++) {
 
 			if (vec[j] < vec[i]) {
@@ -122,8 +182,8 @@ char* invertirCase(char* str) {
 
 	char* copia = copiarString(str);
 
-	const unsigned int largo = obtenerLargo(str);
-	const unsigned int dif = 'a' - 'A';
+	int largo = obtenerLargo(str);
+	unsigned int dif = 'a' - 'A';
 
 	for (int i = 0; i < largo; i++) {
 
@@ -138,44 +198,152 @@ char* invertirCase(char* str) {
 	return copia;
 }
 
-//NO
-int islas(char** mapa, int col, int fil){
-	// IMPLEMENTAR SOLUCION
-    return 0;
+int islas(char** mapa, int col, int fil) {
+	unsigned int cont = 0;
+	for (int i = 0; i < col; i++) {
+		for (int j = 0; j < fil; j++) {
+			if (mapa[i][j] == 'T') {
+				borrarIsla(mapa, i, j, col, fil);
+				cont++;
+			}
+		}
+	}
+	for (int i = 0; i < col; i++) {
+		for (int j = 0; j < fil; j++) {
+			if (mapa[i][j] == 'S') {
+				mapa[i][j] = 'T';
+			}
+		}
+	}
+
+	return cont;
 }
 
-//NO
-unsigned int ocurrenciasSubstring(char **vecStr, int largoVecStr, char *substr)
+unsigned int ocurrenciasSubstring(char** vecStr, int largoVecStr, char* substr)
 {
-	// IMPLEMENTAR SOLUCION
-    return 0;
+	unsigned int contador = 0;
+	unsigned int largoSubstr = obtenerLargo(substr);
+
+	for (int i = 0; i < largoVecStr; i++) {
+
+		if (seEncuentra(vecStr[i], substr)) {
+			contador++;
+		}
+	}
+
+	return contador;
 }
 
-//NO
-char **ordenarVecStrings(char **vecStr, int largoVecStr)
+bool compararStrings(char* str1, char* str2) {
+
+	bool unoMayorQueDos = true;
+	bool stop = false;
+	int largoMin = obtenerLargo(str1) > obtenerLargo(str2) ? obtenerLargo(str2) : obtenerLargo(str1);
+
+	for (int i = 0; !stop && i < largoMin; i++) {
+		if (str1[i] - str2[i] > 0) {
+			unoMayorQueDos = false;
+			stop = true;
+		}
+		else if (str1[i] - str2[i] < 0) {
+			stop = true;
+		}
+	}
+
+	if (stop) {
+		return unoMayorQueDos;
+	}
+	else {
+		if (largoMin == obtenerLargo(str1)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	return false;
+
+	assert(false);
+}
+
+char** ordenarVecStrings(char** vecStr, int largoVecStr)
 {
-	// IMPLEMENTAR SOLUCION
-    return NULL;
+	char** vec = new char*[largoVecStr];
+
+	for (int i = 0; i < largoVecStr; i++) {
+		vec[i] = copiarString(vecStr[i]);
+	}
+
+	for (int i = 0; i < largoVecStr; i++) {
+		for (int j = i + 1; j < largoVecStr; j++) {
+			if (compararStrings(vec[j], vec[i])) {
+				char* aux = vec[i];
+				vec[i] = vec[j];
+				vec[j] = aux;
+			}
+		}
+	}
+	return vec;
 }
 
-int* intercalarVector(int* v1, int* v2, int l1, int l2){
-	// IMPLEMENTAR SOLUCION
-	return NULL;
+int* intercalarVector(int* v1, int* v2, int l1, int l2) {
+
+	int p1 = 0;
+	int p2 = 0;
+	int largo = l1 + l2;
+
+	int* vec = largo != 0 ? new int[largo] : NULL;
+
+	while (p1 + p2 < largo) {
+
+		if (((p1 < l1) && (p2 < l2) && (v1[p1] <= v2[p2])) || (p2 == l2)) {
+			vec[p1 + p2] = v1[p1];
+			p1++;
+		}
+		else {
+			vec[p1 + p2] = v2[p2];
+			p2++;
+		}
+
+	}
+
+	return vec;
 }
 
 bool subconjuntoVector(int* v1, int* v2, int l1, int l2)
 {
-	// IMPLEMENTAR SOLUCION
-	return false;
+	bool found = true;
+
+	for (int i = 0; i < l1 && found; i++) {
+
+		found = false;
+		for (int j = 0; j < l2 && !found; j++) {
+			found = v1[i] == v2[j];
+		}
+	}
+
+	return found;
 }
 
-char** splitStr(char* str, char separador, int &largoRet)
+char** splitStr(char* str, char separador, int& largoRet)
 {
-	// IMPLEMENTAR SOLUCION
+	/*int largo = obtenerLargo(str);
+	unsigned int cont = 0;
+	for (int i = 0; i < largo; i++) {
+		if (str[i] == separador) {
+			cont++;
+		}
+	}
+	largoRet = cont;
+
+	char* separadorString = &separador;
+	char* ptx = strtok(str, separadorString);
+
+	cout << endl << ptx << endl;*/
 	return NULL;
 }
 
-void ordenarVecIntMergeSort(int* vector, int largo) 
+void ordenarVecIntMergeSort(int* vector, int largo)
 {
 	// IMPLEMENTAR SOLUCION
 }

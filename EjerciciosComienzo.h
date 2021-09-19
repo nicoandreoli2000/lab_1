@@ -22,13 +22,27 @@ POS: retorna una copia del string
 */
 char* copiarString(char* str);
 
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: recibe una matriz de 'T' y 'A'
+POS: por recurrencia, cambia todas las 'T' adjacentes que haya (isla) por 'S'
+*/
+void borrarIsla(char** mapa, int col, int fil, int colMax, int filMax);
+
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: recibe un string y un substring
+POS: retorna true si el substring dado se encuentra dentro del string principal y false en caso contrario
+*/
+bool seEncuentra(char* str, char* substr);
+
 
 // ----- EJERCICIOS -----
 
 /*	
  *	EJERCICIO OPCIONAL
-	PRE: recibe dos números enteros
-	POS: retorna la suma de dichos números
+PRE: recibe dos números enteros
+POS: retorna la suma de dichos números
 */
 int suma(int a, int b);
 
