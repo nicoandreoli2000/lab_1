@@ -9,10 +9,24 @@ using namespace std;
 
 /*
  *  FUNCIÓN AUXILIAR
-PRE: recibe un string
-POS: retorna el largo del string sin contar el caracter \0
+PRE: Recibe una lista.
+POS: Imprime la lista en consola.
 */
+void mostrarLista(NodoLista* l);
 
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: Recibe una lista por referencia y un dato.
+POS: Inserta el dato al principio de la lista original.
+*/
+void agregarPpio(NodoLista*& l, int dato);
+
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: Recibe una lista.
+POS: Devuelve una copia de la lista sin compartir memoria con la recibida.
+*/
+NodoLista* copiarLista(NodoLista* l);
 
 // ----- EJERCICIOS -----
 

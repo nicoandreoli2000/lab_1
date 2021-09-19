@@ -1,7 +1,25 @@
 #include "EjerciciosListas.h"
 
 // ----- Funciones auxiliares -----
+void mostrarLista(NodoLista* l) {
+	cout << endl;
+	while (l != NULL) {
+		cout << l->dato << " -> ";
+		l = l->sig;
+	}
+	cout << "NULL" << endl;
+}
 
+void agregarPpio(NodoLista*& l, int dato) {
+	NodoLista* aux = l;
+	l = new NodoLista(dato);
+	l->sig = aux;
+}
+
+NodoLista* copiarLista(NodoLista* l) {
+
+	return NULL;
+}
 // ----- Ejercicios -----
 
 NodoLista* invertirParcial(NodoLista* l) 
