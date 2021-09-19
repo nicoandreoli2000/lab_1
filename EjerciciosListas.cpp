@@ -8,6 +8,7 @@ void mostrarLista(NodoLista* l) {
 		l = l->sig;
 	}
 	cout << "NULL" << endl;
+	//hey
 }
 
 void agregarPpio(NodoLista*& l, int dato) {
