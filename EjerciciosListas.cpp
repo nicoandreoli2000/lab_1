@@ -20,16 +20,10 @@ void agregarPpio(NodoLista*& l, int dato) {
 void agregarFinal(NodoLista*& l, int dato) {
 	if (l == NULL) {
 		agregarPpio(l, dato);
-		return;
 	}
-
-	NodoLista* aux = l;
-
-	while (aux->sig != NULL) {
-		aux = aux->sig;
+	else {
+		agregarFinal(l->sig, dato);
 	}
-
-	aux->sig = new NodoLista(dato);
 }
 
 
@@ -46,8 +40,9 @@ void borrarFinal(NodoLista*& l) {
 }
 
 NodoLista* copiarLista(NodoLista* l) {
-	if (l == NULL) return NULL;
-	else {
+	if (l == NULL) {
+		return NULL;
+	} else {
 		NodoLista* copia = new NodoLista(l->dato);
 		copia->sig = copiarLista(l->sig);
 		return copia;
@@ -56,14 +51,10 @@ NodoLista* copiarLista(NodoLista* l) {
 
 void insertarOrdenado(NodoLista*& l, int dato) {
 	
-	if (l == NULL) {
+	if (l == NULL || dato <= l->dato) {
 		agregarPpio(l, dato);
 	} else {
-		if (dato <= l->dato) {
-			agregarPpio(l, dato);
-		} else {
-			insertarOrdenado(l->sig, dato);
-		}
+		insertarOrdenado(l->sig, dato);
 	}
 }
 
@@ -72,39 +63,40 @@ void insertarOrdenado(NodoLista*& l, int dato) {
 NodoLista* invertirParcial(NodoLista* l) 
 {
 	NodoLista* copia = copiarLista(l);
-
 	borrarFinal(copia);
 
-	if (copia != NULL) {
-	
-		NodoLista* invertida = new NodoLista(copia->dato);
-	
-		while (copia->sig != NULL) {
-			copia = copia->sig;
-			agregarPpio(invertida, copia->dato);
-		}
+	NodoLista* invertida = NULL;
 
-		return invertida;
+	while (copia != NULL) {
+		agregarPpio(invertida, copia->dato);
+		copia = copia->sig;
+	}
 	
-	} else {
-		return NULL;
-	}	
+	return invertida;
 }
 
 void eliminarNesimoDesdeElFinal(NodoLista* &lista, int &n) 
 {
-	//if (n < 1) {
-	//	return;
-	//}
-	//else {
-	//	
-	//	if (n > 0 && lista != NULL) {
-	//		eliminarNesimoDesdeElFinal(lista->sig, n-1);
-	//	}
-	//	else {
-	//		return;
-	//	}
-	//}
+	if (n < 1) {
+		return;
+	}
+	else {
+		
+		if (lista != NULL) {
+			eliminarNesimoDesdeElFinal(lista->sig, n);
+			
+			if (n == 1) {
+				NodoLista* aux = lista->sig;
+
+				delete lista;
+				lista = aux;
+				return;
+			}
+			cout << endl << n << endl;
+
+			n--;
+		}
+	}
 }
 
 NodoLista* listaOrdenadaInsertionSort(NodoLista* l) 
