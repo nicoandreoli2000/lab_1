@@ -1,6 +1,7 @@
 #include "EjerciciosListas.h"
 
 // ----- Funciones auxiliares -----
+
 void mostrarLista(NodoLista* l) {
 	cout << endl;
 	while (l != NULL) {
@@ -15,6 +16,22 @@ void agregarPpio(NodoLista*& l, int dato) {
 	l = new NodoLista(dato);
 	l->sig = aux;
 }
+
+void agregarFinal(NodoLista*& l, int dato) {
+	if (l == NULL) {
+		agregarPpio(l, dato);
+		return;
+	}
+
+	NodoLista* aux = l;
+
+	while (aux->sig != NULL) {
+		aux = aux->sig;
+	}
+
+	aux->sig = new NodoLista(dato);
+}
+
 
 void borrarFinal(NodoLista*& l) {
 	if (l == NULL) return;
@@ -37,13 +54,25 @@ NodoLista* copiarLista(NodoLista* l) {
 	}
 }
 
-//Posibles funciones: concatenar, insercion al final, borrar ultimo elem...
+void insertarOrdenado(NodoLista*& l, int dato) {
+	
+	if (l == NULL) {
+		agregarPpio(l, dato);
+	} else {
+		if (dato <= l->dato) {
+			agregarPpio(l, dato);
+		} else {
+			insertarOrdenado(l->sig, dato);
+		}
+	}
+}
 
 // ----- Ejercicios -----
 
 NodoLista* invertirParcial(NodoLista* l) 
 {
 	NodoLista* copia = copiarLista(l);
+
 	borrarFinal(copia);
 
 	if (copia != NULL) {
@@ -56,32 +85,38 @@ NodoLista* invertirParcial(NodoLista* l)
 		}
 
 		return invertida;
-	}
-	else {
+	
+	} else {
 		return NULL;
 	}	
 }
 
-void eliminarNesimoDesdeElFinal(NodoLista*& lista, int &n) 
+void eliminarNesimoDesdeElFinal(NodoLista* &lista, int &n) 
 {
-	if (n < 1) {
-		return;
-	}
-	else {
-		
-		if (n > 0 && lista != NULL) {
-			eliminarNesimoDesdeElFinal(lista->sig, n-1);
-		}
-		else {
-			return;
-		}
-	}
+	//if (n < 1) {
+	//	return;
+	//}
+	//else {
+	//	
+	//	if (n > 0 && lista != NULL) {
+	//		eliminarNesimoDesdeElFinal(lista->sig, n-1);
+	//	}
+	//	else {
+	//		return;
+	//	}
+	//}
 }
 
 NodoLista* listaOrdenadaInsertionSort(NodoLista* l) 
 {
-	// IMPLEMENTAR SOLUCION
-	return NULL;
+	NodoLista* listaRet = NULL;
+
+	while (l != NULL) {
+		insertarOrdenado(listaRet, l->dato);
+		l = l->sig;
+	}
+
+	return listaRet;
 }
 
 void listaOrdenadaSelectionSort(NodoLista*& l)

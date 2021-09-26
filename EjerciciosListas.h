@@ -23,6 +23,13 @@ void agregarPpio(NodoLista*& l, int dato);
 
 /*
  *  FUNCIÓN AUXILIAR
+PRE: Recibe una lista por referencia y un dato.
+POS: Inserta el dato al final de la lista original.
+*/
+void agregarFinal(NodoLista*& l, int dato);
+
+/*
+ *  FUNCIÓN AUXILIAR
 PRE: Recibe una lista por referencia.
 POS: Borra el último elemento de la lista, si la lista es NULL no tiene efecto.
 */
@@ -35,46 +42,61 @@ POS: Devuelve una copia de la lista sin compartir memoria con la recibida.
 */
 NodoLista* copiarLista(NodoLista* l);
 
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: Recibe una lista y un dato.
+POS: Inserta el dato de manera ordenada en la lista.
+*/
+void insertarOrdenado(NodoLista*& l, int dato);
+
+/*
+int obtenerLargo(NodoLista* lista);
+void agregarFinal(NodoLista*& lista, int dato);
+void borrarPpio(NodoLista*& lista);
+void agregarEnPos(NodoLista*& lista, int dato, int pos);
+void borrarEnPos(NodoLista*& lista, int pos);
+*/
+
 // ----- EJERCICIOS -----
 
 /*
  *	EJERCICIO OBLIGATORIO
 PRE: Recibe una lista de enteros simplemente encadenada con al menos 1 elemento.
-POS: Retorna una nueva lista (que no comparte memoria con la anterior) que tiene todos los elementos de la 
-     lista original en orden Invertido, excluyendo el último elemento.
-     La lista retornada no deberá compartir memoria con la lista recibida ni deberá modificarla.
+POS: Retorna una nueva lista (que no comparte memoria con la anterior) que tiene todos los elementos de la
+	 lista original en orden Invertido, excluyendo el último elemento.
+	 La lista retornada no deberá compartir memoria con la lista recibida ni deberá modificarla.
 
 Ejemplo
 Entrada: (1,2,3,4)
 Salida: (3,2,1)
 */
-NodoLista* invertirParcial(NodoLista* l); 
+NodoLista* invertirParcial(NodoLista* l);
 
 /*
  *	EJERCICIO OBLIGATORIO
 PRE: Recibe una lista simplemente encadenada
-POS: Elimina n-ésimo elemento de la lista, empezando a contar desde el último nodo. 
+POS: Elimina n-ésimo elemento de la lista, empezando a contar desde el último nodo.
 	 Si n es mayor al largo de la lista, o menor a 1, la operación no tendrá efecto.
 	 Esta operación no debe recorrer la lista más de una vez. No se pueden usar funciones auxiliares.
 	 (Recomendado resolver de forma recursiva)
 
-Ejemplo 
-Entrada: ((1,2,3,4,5), 2) 
-Lista resultado: (1,2,3,5) 
+Ejemplo
+Entrada: ((1,2,3,4,5), 2)
+Lista resultado: (1,2,3,5)
 
 Ejemplo
 Entrada: ((2, 8, -7, 4), 5 )
 Lista resultado: (2, 8, -7, 4)
 */
-void eliminarNesimoDesdeElFinal(NodoLista*& lista, int &n);
+void eliminarNesimoDesdeElFinal(NodoLista*& lista, int& n);
 
 /*
  *	EJERCICIO OBLIGATORIO
 PRE: Recibe una lista de enteros simplemente encadenada.
 POS: Retorna una nueva lista (que no comparte memoria con la anterior) que contiene todos los elementos
-     de la lista original, ordenados de menor a mayor.
-     La lista retornada no deberá compartir memoria con la lista recibida ni deberá modificarla.
-     Se deberá utilizar el algoritmo InsertionSort para ordenar los elementos.
+	 de la lista original, ordenados de menor a mayor.
+	 La lista retornada no deberá compartir memoria con la lista recibida ni deberá modificarla.
+	 Se deberá utilizar el algoritmo InsertionSort para ordenar los elementos.
 
 Ejemplo
 Entrada: (6,1,1,9)
@@ -86,7 +108,7 @@ NodoLista* listaOrdenadaInsertionSort(NodoLista* l);
  *	EJERCICIO OBLIGATORIO
 PRE: Recibe una lista de enteros simplemente encadenada.
 POS: Ordena la lista utilizando SelectionSort sin utilizar estructuras auxiliares (vector, otra lista , etc).
-     (Puede intecambiar los nodos o los datos en los nodos.)
+	 (Puede intecambiar los nodos o los datos en los nodos.)
 
 Ejemplo
 Entrada: (4,0,1,3)
@@ -114,7 +136,7 @@ PRE: Recibe dos listas simplemente encadenadas, ambas ordenadas en orden crecien
 POS: Retorna una nueva lista con todos los elementos de l1 y l2, incluyendo repetidos, ordenados en orden creciente.
 	 La lista retornada no puede compartir memoria con las listas recibidas, y estas no pueden ser modificadas.
 	 La funcion no debe recorrer l1 o l2 mas de una vez, y la lista resultado no debera recorrerse
-	 El ejercicio se deberá resolver de forma recursiva. 
+	 El ejercicio se deberá resolver de forma recursiva.
 
 Ejemplo
 Entrada: (((1,3,5,7,9,9), (2,2,4,6,8))
@@ -126,7 +148,7 @@ NodoLista* intercalarRec(NodoLista* l1, NodoLista* l2);
  *	EJERCICIO OPCIONAL
 PRE: Recibe una lista l simplemente encadenada y un entero x
 POS: Retorna una nueva lista, que tiene todos los elementos de l en orden inverso, y x como primer y ultimo elemento
-     la lista retornada no puede compartir memoria con la lista recibida, y esta no puede ser modificada
+	 la lista retornada no puede compartir memoria con la lista recibida, y esta no puede ser modificada
 	 la funcion no debe recorrer l mas de una vez, y la lista resultado no debera recorrerse
 
 Ejemplo
@@ -160,13 +182,13 @@ Ejemplo
 Entrada: (1,2,2,2,2,3,3,4)
 Lista resultado: (1,4)
 */
-void eliminarDuplicadosListaOrdenadaDos(NodoLista*& l); 
+void eliminarDuplicadosListaOrdenadaDos(NodoLista*& l);
 
 
 /*
  *	EJERCICIO OPCIONAL
 PRE: Recibe una lista simplemente encadenada
-POS: Retorna si la lista es palíndroma o no. En otras palabras, el primer elemento es igual al último, el segundo 
+POS: Retorna si la lista es palíndroma o no. En otras palabras, el primer elemento es igual al último, el segundo
 	 al penúltimo, etc. (Se puede leer igual de los dos lados).
 
 Ejemplos:
@@ -195,14 +217,14 @@ Secuencia: (2,4,5,6)
 Resultado: (1,2,3,4,5,6,7,8,9)
 
 */
-void eliminarSecuencia(NodoLista* &l, NodoLista* secuencia);
+void eliminarSecuencia(NodoLista*& l, NodoLista* secuencia);
 
 
 /*
  *	EJERCICIO OPCIONAL
 PRE: recibe una lista simplemente encadenada
 POS: mueve el nodo que se encuentra en la posición inicial a la posición final.
-	 Las posiciones de la lista serán numeradas a partir del 1, 
+	 Las posiciones de la lista serán numeradas a partir del 1,
 	 sindo ésta la posición del primer nodo y el largo de la lista la última posición.
 	 Si alguna de las posiciones no se encuentra dentro del rango
 	 de la lista, ésta no debe verse afectada.
@@ -224,5 +246,5 @@ inicial: 2
 final: 10
 Resultado: (4,5,6,3,4,6,5)
 */
-void moverNodo(NodoLista *&lista, unsigned int inicial, unsigned int final);
+void moverNodo(NodoLista*& lista, unsigned int inicial, unsigned int final);
 
