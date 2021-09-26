@@ -87,12 +87,9 @@ void eliminarNesimoDesdeElFinal(NodoLista* &lista, int &n)
 			
 			if (n == 1) {
 				NodoLista* aux = lista->sig;
-
 				delete lista;
 				lista = aux;
-				return;
 			}
-			cout << endl << n << endl;
 
 			n--;
 		}
