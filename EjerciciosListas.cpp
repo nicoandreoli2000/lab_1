@@ -110,13 +110,60 @@ NodoLista* listaOrdenadaInsertionSort(NodoLista* l)
 
 void listaOrdenadaSelectionSort(NodoLista*& l)
 {
-	// IMPLEMENTAR SOLUCION
+	NodoLista* rec = l;
+
+	NodoLista* min;
+	NodoLista* minRec;
+
+	while (rec != NULL) {
+
+		min = rec;
+		minRec = rec;
+
+		while (minRec->sig != NULL) {
+
+			minRec = minRec->sig;
+
+			if (minRec->dato < min->dato) {
+				int aux = minRec->dato;
+				minRec->dato = min->dato;
+				min->dato = aux;
+			}
+		}
+
+		rec = rec->sig;
+	}	
 }
 
 NodoLista* intercalarIter(NodoLista* l1, NodoLista* l2)
 {
-	// IMPLEMENTAR SOLUCION
-	return NULL;
+	NodoLista* res = NULL;
+
+	while (l1 != NULL || l2 != NULL) {
+
+		if (l1 != NULL && l2 != NULL) {
+
+			if (l1->dato < l2->dato) {
+				agregarFinal(res,l1->dato);
+				l1 = l1->sig;
+			}
+			else {
+				agregarFinal(res, l2->dato);
+				l2 = l2->sig;
+			}
+		}
+		else if (l2 != NULL) {
+			agregarFinal(res, l2->dato);
+			l2 = l2->sig;
+		
+		}
+		else {
+			agregarFinal(res, l1->dato);
+			l1 = l1->sig;
+		}
+	}
+
+	return res;
 }
 
 NodoLista* intercalarRec(NodoLista* l1, NodoLista* l2)

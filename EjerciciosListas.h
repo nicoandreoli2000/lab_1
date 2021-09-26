@@ -50,8 +50,9 @@ POS: Inserta el dato de manera ordenada en la lista.
 void insertarOrdenado(NodoLista*& l, int dato);
 
 /*
+* Posibles funciones auxiliares:
+----------------------
 int obtenerLargo(NodoLista* lista);
-void agregarFinal(NodoLista*& lista, int dato);
 void borrarPpio(NodoLista*& lista);
 void agregarEnPos(NodoLista*& lista, int dato, int pos);
 void borrarEnPos(NodoLista*& lista, int pos);
