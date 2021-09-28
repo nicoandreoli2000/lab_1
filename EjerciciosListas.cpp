@@ -291,6 +291,7 @@ void eliminarSecAux(NodoLista* l, NodoLista* sec, int aux) {
 void eliminarSecuencia(NodoLista* &l, NodoLista* secuencia) 
 {
 	NodoLista* rec = l;
+	NodoLista* borde = NULL;
 	NodoLista* sec = secuencia;
 	NodoLista* aux = NULL;
 
@@ -300,13 +301,13 @@ void eliminarSecuencia(NodoLista* &l, NodoLista* secuencia)
 			sec = sec->sig;
 		}
 		else {
-			aux = rec;
+			aux = borde;
 			sec = secuencia;
 			if (rec->dato == sec->dato) {
 				sec = sec->sig;
 			}
 		}
-
+		borde = rec;
 		rec = rec->sig;
 	}
 
@@ -319,10 +320,14 @@ void eliminarSecuencia(NodoLista* &l, NodoLista* secuencia)
 			}
 		}
 		else {
+			rec = aux->sig;
+			mostrarLista(aux);
+			mostrarLista(rec);
 			while (sec != NULL) {
-				rec = aux->sig;
 				aux->sig = rec->sig;
+				NodoLista* temp = rec->sig;
 				delete rec;
+				rec = temp;
 				sec = sec->sig;
 			}
 			
