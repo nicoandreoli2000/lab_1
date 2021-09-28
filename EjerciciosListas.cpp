@@ -273,40 +273,9 @@ NodoLista* exor(NodoLista* l1, NodoLista* l2)
 	return res;
 }
 
-void exorAux(NodoLista*& l1, NodoLista*& l2, NodoLista*& res) {}
-
 void eliminarDuplicadosListaOrdenadaDos(NodoLista*& l) 
 {
-	/*NodoLista* auxLista = l;
-	bool elimineEnLaAnterior = false;
-	bool casoBorde = true;
-
-	mostrarLista(l);
-
-	while (auxLista != NULL) {
-
-		NodoLista* temp = auxLista->sig;
 	
-		if (temp != NULL && auxLista->dato == temp->dato) {
-			delete auxLista;
-			elimineEnLaAnterior = true;
-
-			if (casoBorde) l = temp;
-		}
-		else {
-			if (elimineEnLaAnterior) {
-				delete auxLista;
-				elimineEnLaAnterior = false;
-
-				if (casoBorde) l = temp;
-			}
-			else {
-				casoBorde = false;
-			}
-		}
-
-		auxLista = temp;
-	}*/
 }
 
 bool palindromo(NodoLista* l)
@@ -315,64 +284,51 @@ bool palindromo(NodoLista* l)
 	return false;
 }
 
+void eliminarSecAux(NodoLista* l, NodoLista* sec, int aux) {
+
+}
+
 void eliminarSecuencia(NodoLista* &l, NodoLista* secuencia) 
 {
-	NodoLista* lista = l;
+	NodoLista* rec = l;
 	NodoLista* sec = secuencia;
-	
-	unsigned int pos = 0;
-	unsigned int counter = 0;
+	NodoLista* aux = NULL;
 
-	while (lista != NULL && sec != NULL) {
+	while (rec != NULL && sec != NULL) {
 
-		if (lista->dato == sec->dato) {
+		if (rec->dato == sec->dato) {
 			sec = sec->sig;
 		}
 		else {
-
+			aux = rec;
 			sec = secuencia;
-			
-			if (pos != counter && lista->dato == sec->dato) {
-				pos = counter;
-				sec = sec->sig;
-			}
-			else {
-				pos = counter + 1;
-
-			}
-		
 		}
 
-		counter++;
-		lista = lista->sig;
+		rec = rec->sig;
 	}
 
 	if (sec == NULL) {
 		sec = secuencia;
-		lista = l;
-
-		for (int i = 0; i < pos; i++) {
-			lista = lista->sig;
-		}
-
-		while (sec != NULL) {
-
-			if (pos != 0) {
-				NodoLista* temp = lista->sig;
-				delete lista;
-				lista = temp;
-				cout << endl << "asd";
+		if (aux == NULL) {
+			while (sec != NULL) {
+				borrarPpio(l);
+				sec = sec->sig;
 			}
-			else {
-				borrarPpio(lista);
-			}
-
-			sec = sec->sig;
 		}
-		
+		else {
+			while (sec != NULL) {
+				rec = aux->sig;
+				aux->sig = rec->sig;
+				delete rec;
+				sec = sec->sig;
+			}
+			
+		}
 		
 	}
 }
+
+
 
 void moverNodo(NodoLista* &lista, unsigned int inicial, unsigned int final)
 {
