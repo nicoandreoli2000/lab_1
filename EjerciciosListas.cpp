@@ -11,6 +11,17 @@ void mostrarLista(NodoLista* l) {
 	cout << "NULL" << endl;
 }
 
+int obtenerLargo(NodoLista* l) {
+	int count = 0;
+
+	while (l != NULL) {
+		count++;
+		l = l->sig;
+	}
+
+	return count;
+}
+
 void agregarPpio(NodoLista*& l, int dato) {
 	NodoLista* aux = l;
 	l = new NodoLista(dato);
@@ -39,6 +50,14 @@ void borrarFinal(NodoLista*& l) {
 	borrarFinal(l->sig);
 }
 
+void borrarPpio(NodoLista*& l) {
+	if (l == NULL) return;
+
+	NodoLista* temp = l->sig;
+	delete l;
+	l = temp;
+}
+
 NodoLista* copiarLista(NodoLista* l) {
 	if (l == NULL) {
 		return NULL;
@@ -55,6 +74,31 @@ void insertarOrdenado(NodoLista*& l, int dato) {
 		agregarPpio(l, dato);
 	} else {
 		insertarOrdenado(l->sig, dato);
+	}
+}
+
+void intercalarAux(NodoLista*& l1, NodoLista*& l2, NodoLista*& res) {
+
+	if (l1 == NULL && l2 == NULL) return;
+
+	if (l1 != NULL && l2 != NULL) {
+
+		if (l1->dato < l2->dato) {
+			intercalarAux(l1->sig, l2, res);
+			agregarPpio(res, l1->dato);
+		}
+		else {
+			intercalarAux(l1, l2->sig, res);
+			agregarPpio(res, l2->dato);
+		}
+	}
+	else if (l2 != NULL) {
+		intercalarAux(l1, l2->sig, res);
+		agregarPpio(res, l2->dato);
+	}
+	else {
+		intercalarAux(l1->sig, l2, res);
+		agregarPpio(res, l1->dato);
 	}
 }
 
@@ -168,8 +212,11 @@ NodoLista* intercalarIter(NodoLista* l1, NodoLista* l2)
 
 NodoLista* intercalarRec(NodoLista* l1, NodoLista* l2)
 {
-	// IMPLEMENTAR SOLUCION
-	return NULL;
+	NodoLista* res = NULL;
+
+	intercalarAux(l1, l2, res);
+
+	return res;
 }
 
 NodoLista* insComFin(NodoLista* l, int x)
@@ -180,13 +227,86 @@ NodoLista* insComFin(NodoLista* l, int x)
 
 NodoLista* exor(NodoLista* l1, NodoLista* l2)
 {
-	// IMPLEMENTAR SOLUCION
-	return NULL;
+	NodoLista* res = NULL;
+	int aux = INT_MIN;
+
+	while (l1 != NULL || l2 != NULL) {
+
+		if (l1 != NULL && l2 != NULL) {
+
+			if (l1->dato < l2->dato) {
+				if (aux != l1->dato) {
+					agregarFinal(res, l1->dato);
+					aux = l1->dato;
+				}
+				l1 = l1->sig;
+
+			} else if (l1->dato > l2->dato) {
+				if (aux != l2->dato) {
+					agregarFinal(res, l2->dato);
+					aux = l2->dato;
+				}
+				l2 = l2->sig;
+			}
+			else {
+				aux = l1->dato;
+				l2 = l2->sig;
+				l1 = l1->sig;
+			}
+		}
+		else if (l2 != NULL) {
+			if (aux != l2->dato) {
+				agregarFinal(res, l2->dato);
+				aux = l2->dato;
+			}
+			l2 = l2->sig;
+		}
+		else {
+			if (aux != l1->dato) {
+				agregarFinal(res, l1->dato);
+				aux = l1->dato;
+			}
+			l1 = l1->sig;
+		}
+	}
+
+	return res;
 }
+
+void exorAux(NodoLista*& l1, NodoLista*& l2, NodoLista*& res) {}
 
 void eliminarDuplicadosListaOrdenadaDos(NodoLista*& l) 
 {
-	// IMPLEMENTAR SOLUCION
+	/*NodoLista* auxLista = l;
+	bool elimineEnLaAnterior = false;
+	bool casoBorde = true;
+
+	mostrarLista(l);
+
+	while (auxLista != NULL) {
+
+		NodoLista* temp = auxLista->sig;
+	
+		if (temp != NULL && auxLista->dato == temp->dato) {
+			delete auxLista;
+			elimineEnLaAnterior = true;
+
+			if (casoBorde) l = temp;
+		}
+		else {
+			if (elimineEnLaAnterior) {
+				delete auxLista;
+				elimineEnLaAnterior = false;
+
+				if (casoBorde) l = temp;
+			}
+			else {
+				casoBorde = false;
+			}
+		}
+
+		auxLista = temp;
+	}*/
 }
 
 bool palindromo(NodoLista* l)
@@ -197,7 +317,61 @@ bool palindromo(NodoLista* l)
 
 void eliminarSecuencia(NodoLista* &l, NodoLista* secuencia) 
 {
-	// IMPLEMENTAR SOLUCION
+	NodoLista* lista = l;
+	NodoLista* sec = secuencia;
+	
+	unsigned int pos = 0;
+	unsigned int counter = 0;
+
+	while (lista != NULL && sec != NULL) {
+
+		if (lista->dato == sec->dato) {
+			sec = sec->sig;
+		}
+		else {
+
+			sec = secuencia;
+			
+			if (pos != counter && lista->dato == sec->dato) {
+				pos = counter;
+				sec = sec->sig;
+			}
+			else {
+				pos = counter + 1;
+
+			}
+		
+		}
+
+		counter++;
+		lista = lista->sig;
+	}
+
+	if (sec == NULL) {
+		sec = secuencia;
+		lista = l;
+
+		for (int i = 0; i < pos; i++) {
+			lista = lista->sig;
+		}
+
+		while (sec != NULL) {
+
+			if (pos != 0) {
+				NodoLista* temp = lista->sig;
+				delete lista;
+				lista = temp;
+				cout << endl << "asd";
+			}
+			else {
+				borrarPpio(lista);
+			}
+
+			sec = sec->sig;
+		}
+		
+		
+	}
 }
 
 void moverNodo(NodoLista* &lista, unsigned int inicial, unsigned int final)

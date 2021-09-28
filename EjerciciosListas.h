@@ -16,6 +16,13 @@ void mostrarLista(NodoLista* l);
 
 /*
  *  FUNCIÓN AUXILIAR
+PRE: Recibe una lista.
+POS: Devuelve el largo de la lista.
+*/
+int obtenerLargo(NodoLista* lista);
+
+/*
+ *  FUNCIÓN AUXILIAR
 PRE: Recibe una lista por referencia y un dato.
 POS: Inserta el dato al principio de la lista original.
 */
@@ -37,6 +44,13 @@ void borrarFinal(NodoLista*& l);
 
 /*
  *  FUNCIÓN AUXILIAR
+PRE: Recibe una lista por referencia.
+POS: Borra el primer elemento de la lista, si la lista es NULL no tiene efecto.
+*/
+void borrarPpio(NodoLista*& l);
+
+/*
+ *  FUNCIÓN AUXILIAR
 PRE: Recibe una lista.
 POS: Devuelve una copia de la lista sin compartir memoria con la recibida.
 */
@@ -50,13 +64,11 @@ POS: Inserta el dato de manera ordenada en la lista.
 void insertarOrdenado(NodoLista*& l, int dato);
 
 /*
-* Posibles funciones auxiliares:
-----------------------
-int obtenerLargo(NodoLista* lista);
-void borrarPpio(NodoLista*& lista);
-void agregarEnPos(NodoLista*& lista, int dato, int pos);
-void borrarEnPos(NodoLista*& lista, int pos);
+ *  FUNCIÓN AUXILIAR
+PRE: Recibe dos listas ordenadas y una lista vacía.
+POS: Intercala las listas dentro de la vacía de manera que quede ordenada (por recurrencia).
 */
+void intercalarAux(NodoLista*& l1, NodoLista*& l2, NodoLista*& res);
 
 // ----- EJERCICIOS -----
 
