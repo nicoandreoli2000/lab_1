@@ -302,6 +302,9 @@ void eliminarSecuencia(NodoLista* &l, NodoLista* secuencia)
 		else {
 			aux = rec;
 			sec = secuencia;
+			if (rec->dato == sec->dato) {
+				sec = sec->sig;
+			}
 		}
 
 		rec = rec->sig;
