@@ -31,9 +31,17 @@ void agregarPpio(NodoLista*& l, int dato);
 /*
  *  FUNCIÓN AUXILIAR
 PRE: Recibe una lista por referencia y un dato.
-POS: Inserta el dato al final de la lista original.
+POS: Inserta el dato al final de la lista original en O(n).
 */
 void agregarFinal(NodoLista*& l, int dato);
+
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: Recibe una dos listas (una aputnando al inicio de la lista y otra al último nodo) y un dato.
+POS: Inserta el dato al final de la lista original en O(1). La primera lista debe seguir apuntando al inicio
+     y la segunda al último nodo insertado.
+*/
+void agregarFinalOrdenUno(NodoLista*& l, NodoLista*& ptrFin, int dato);
 
 /*
  *  FUNCIÓN AUXILIAR
@@ -69,6 +77,21 @@ PRE: Recibe dos listas ordenadas y una lista vacía.
 POS: Intercala las listas dentro de la vacía de manera que quede ordenada (por recurrencia).
 */
 void intercalarAux(NodoLista*& l1, NodoLista*& l2, NodoLista*& res);
+
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: Recibe una lista ordenada y el dato con el que comienza (l->dato).
+POS: Elimina todas las ocurrencias del dato recibido (sabemos que las ocurrencias están todas juntas al principio
+	 porque la lista está ordenada).
+*/
+void eliminarDato(NodoLista*& l, int dato);
+
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: Recibe dos listas.
+POS: Devuelve true si la primer lista comienza con los elementos de la segunda y devuelve false en cualquier otro caso.
+*/
+bool haySecuenciaAlInicio(NodoLista* l, NodoLista* sec);
 
 // ----- EJERCICIOS -----
 
@@ -196,7 +219,6 @@ Entrada: (1,2,2,2,2,3,3,4)
 Lista resultado: (1,4)
 */
 void eliminarDuplicadosListaOrdenadaDos(NodoLista*& l);
-
 
 /*
  *	EJERCICIO OPCIONAL

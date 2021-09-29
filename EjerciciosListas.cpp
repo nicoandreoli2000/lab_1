@@ -37,6 +37,15 @@ void agregarFinal(NodoLista*& l, int dato) {
 	}
 }
 
+void agregarFinalOrdenUno(NodoLista*& l, NodoLista*& ptrFin, int dato) {
+	if (l == NULL) {
+		l = new NodoLista(dato);
+		ptrFin = l;
+		return;
+	}
+	ptrFin->sig = new NodoLista(dato);
+	ptrFin = ptrFin->sig;
+}
 
 void borrarFinal(NodoLista*& l) {
 	if (l == NULL) return;
@@ -61,7 +70,8 @@ void borrarPpio(NodoLista*& l) {
 NodoLista* copiarLista(NodoLista* l) {
 	if (l == NULL) {
 		return NULL;
-	} else {
+	}
+	else {
 		NodoLista* copia = new NodoLista(l->dato);
 		copia->sig = copiarLista(l->sig);
 		return copia;
@@ -69,10 +79,11 @@ NodoLista* copiarLista(NodoLista* l) {
 }
 
 void insertarOrdenado(NodoLista*& l, int dato) {
-	
+
 	if (l == NULL || dato <= l->dato) {
 		agregarPpio(l, dato);
-	} else {
+	}
+	else {
 		insertarOrdenado(l->sig, dato);
 	}
 }
@@ -102,9 +113,35 @@ void intercalarAux(NodoLista*& l1, NodoLista*& l2, NodoLista*& res) {
 	}
 }
 
+void eliminarDato(NodoLista*& l, int dato) {
+	if (l == NULL) return;
+
+	if (l->dato == dato) {
+		NodoLista* aux = l->sig;
+		delete l;
+		l = aux;
+		eliminarDato(l, dato);
+	}
+}
+
+bool haySecuenciaAlInicio(NodoLista* l, NodoLista* sec) {
+
+	while (l != NULL && sec != NULL) {
+		if (l->dato == sec->dato) {
+			l = l->sig;
+			sec = sec->sig;
+		}
+		else {
+			l = NULL;
+		}
+	}
+
+	return sec == NULL;
+}
+
 // ----- Ejercicios -----
 
-NodoLista* invertirParcial(NodoLista* l) 
+NodoLista* invertirParcial(NodoLista* l)
 {
 	NodoLista* copia = copiarLista(l);
 	borrarFinal(copia);
@@ -115,20 +152,20 @@ NodoLista* invertirParcial(NodoLista* l)
 		agregarPpio(invertida, copia->dato);
 		copia = copia->sig;
 	}
-	
+
 	return invertida;
 }
 
-void eliminarNesimoDesdeElFinal(NodoLista* &lista, int &n) 
+void eliminarNesimoDesdeElFinal(NodoLista*& lista, int& n)
 {
 	if (n < 1) {
 		return;
 	}
 	else {
-		
+
 		if (lista != NULL) {
 			eliminarNesimoDesdeElFinal(lista->sig, n);
-			
+
 			if (n == 1) {
 				NodoLista* aux = lista->sig;
 				delete lista;
@@ -140,7 +177,7 @@ void eliminarNesimoDesdeElFinal(NodoLista* &lista, int &n)
 	}
 }
 
-NodoLista* listaOrdenadaInsertionSort(NodoLista* l) 
+NodoLista* listaOrdenadaInsertionSort(NodoLista* l)
 {
 	NodoLista* listaRet = NULL;
 
@@ -176,33 +213,34 @@ void listaOrdenadaSelectionSort(NodoLista*& l)
 		}
 
 		rec = rec->sig;
-	}	
+	}
 }
 
 NodoLista* intercalarIter(NodoLista* l1, NodoLista* l2)
 {
 	NodoLista* res = NULL;
+	NodoLista* fin = NULL;
 
 	while (l1 != NULL || l2 != NULL) {
 
 		if (l1 != NULL && l2 != NULL) {
 
 			if (l1->dato < l2->dato) {
-				agregarFinal(res,l1->dato);
+				agregarFinalOrdenUno(res, fin, l1->dato);
 				l1 = l1->sig;
 			}
 			else {
-				agregarFinal(res, l2->dato);
+				agregarFinalOrdenUno(res, fin, l2->dato);
 				l2 = l2->sig;
 			}
 		}
 		else if (l2 != NULL) {
-			agregarFinal(res, l2->dato);
+			agregarFinalOrdenUno(res, fin, l2->dato);
 			l2 = l2->sig;
-		
+
 		}
 		else {
-			agregarFinal(res, l1->dato);
+			agregarFinalOrdenUno(res, fin, l1->dato);
 			l1 = l1->sig;
 		}
 	}
@@ -228,6 +266,7 @@ NodoLista* insComFin(NodoLista* l, int x)
 NodoLista* exor(NodoLista* l1, NodoLista* l2)
 {
 	NodoLista* res = NULL;
+	NodoLista* fin = NULL;
 	int aux = INT_MIN;
 
 	while (l1 != NULL || l2 != NULL) {
@@ -236,14 +275,15 @@ NodoLista* exor(NodoLista* l1, NodoLista* l2)
 
 			if (l1->dato < l2->dato) {
 				if (aux != l1->dato) {
-					agregarFinal(res, l1->dato);
+					agregarFinalOrdenUno(res, fin, l1->dato);
 					aux = l1->dato;
 				}
 				l1 = l1->sig;
 
-			} else if (l1->dato > l2->dato) {
+			}
+			else if (l1->dato > l2->dato) {
 				if (aux != l2->dato) {
-					agregarFinal(res, l2->dato);
+					agregarFinalOrdenUno(res, fin, l2->dato);
 					aux = l2->dato;
 				}
 				l2 = l2->sig;
@@ -256,14 +296,14 @@ NodoLista* exor(NodoLista* l1, NodoLista* l2)
 		}
 		else if (l2 != NULL) {
 			if (aux != l2->dato) {
-				agregarFinal(res, l2->dato);
+				agregarFinalOrdenUno(res, fin, l2->dato);
 				aux = l2->dato;
 			}
 			l2 = l2->sig;
 		}
 		else {
 			if (aux != l1->dato) {
-				agregarFinal(res, l1->dato);
+				agregarFinalOrdenUno(res, fin, l1->dato);
 				aux = l1->dato;
 			}
 			l1 = l1->sig;
@@ -273,9 +313,21 @@ NodoLista* exor(NodoLista* l1, NodoLista* l2)
 	return res;
 }
 
-void eliminarDuplicadosListaOrdenadaDos(NodoLista*& l) 
+void eliminarDuplicadosListaOrdenadaDos(NodoLista*& l)
 {
-	
+	if (l == NULL) return;
+
+	if (l->sig != NULL) {
+
+		if (l->dato == l->sig->dato) {
+			eliminarDato(l, l->dato);
+			eliminarDuplicadosListaOrdenadaDos(l);
+		}
+		else {
+			eliminarDuplicadosListaOrdenadaDos(l->sig);
+		}
+
+	}
 }
 
 bool palindromo(NodoLista* l)
@@ -284,61 +336,26 @@ bool palindromo(NodoLista* l)
 	return false;
 }
 
-void eliminarSecAux(NodoLista* l, NodoLista* sec, int aux) {
-
-}
-
-void eliminarSecuencia(NodoLista* &l, NodoLista* secuencia) 
+void eliminarSecuencia(NodoLista*& l, NodoLista* secuencia)
 {
-	NodoLista* rec = l;
-	NodoLista* borde = NULL;
-	NodoLista* sec = secuencia;
-	NodoLista* aux = NULL;
+	if (l == NULL) return;
 
-	while (rec != NULL && sec != NULL) {
-
-		if (rec->dato == sec->dato) {
-			sec = sec->sig;
+	if (haySecuenciaAlInicio(l, secuencia)) {
+		while (secuencia != NULL) {
+			NodoLista* aux = l->sig;
+			delete l;
+			l = aux;
+			secuencia = secuencia->sig;
 		}
-		else {
-			aux = borde;
-			sec = secuencia;
-			if (rec->dato == sec->dato) {
-				sec = sec->sig;
-			}
-		}
-		borde = rec;
-		rec = rec->sig;
 	}
-
-	if (sec == NULL) {
-		sec = secuencia;
-		if (aux == NULL) {
-			while (sec != NULL) {
-				borrarPpio(l);
-				sec = sec->sig;
-			}
-		}
-		else {
-			rec = aux->sig;
-			mostrarLista(aux);
-			mostrarLista(rec);
-			while (sec != NULL) {
-				aux->sig = rec->sig;
-				NodoLista* temp = rec->sig;
-				delete rec;
-				rec = temp;
-				sec = sec->sig;
-			}
-			
-		}
-		
+	else {
+		eliminarSecuencia(l->sig, secuencia);
 	}
 }
 
 
 
-void moverNodo(NodoLista* &lista, unsigned int inicial, unsigned int final)
+void moverNodo(NodoLista*& lista, unsigned int inicial, unsigned int final)
 {
 	// IMPLEMENTAR SOLUCION
 }
