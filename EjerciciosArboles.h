@@ -5,7 +5,23 @@ using namespace std;
 #include "Definiciones.h"
 
 
-//EjerciciosArboles.h EjerciciosArboles.cpp 
+// ----- FUNCIONES AUXILIARES -----
+
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: Recibe un arbol y un dato.
+POS: Si el dato del nodo coincide con el recibido, fija el arbol
+en NULL, de lo contrario lo fija hacia la izq o der dependiendo si es mayor o igual.
+*/
+void auxCamino(NodoAB*& arbol, int x);
+
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: Recibe un arbol y un nivel.
+POS: Resuelve el ejericio sumaPorNiveles mediante recurrencia.
+*/
+int auxSumaPorNiveles(NodoAG* raiz, int k);
+
 
 /*
  *	EJERCICIO OPCIONAL
