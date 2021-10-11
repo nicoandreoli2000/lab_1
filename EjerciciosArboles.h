@@ -23,6 +23,8 @@ POS: Resuelve el ejericio sumaPorNiveles mediante recurrencia.
 int auxSumaPorNiveles(NodoAG* raiz, int k);
 
 
+// ----- EJERCICIOS -----
+
 /*
  *	EJERCICIO OPCIONAL
 PRE: recibe un arbol binario
