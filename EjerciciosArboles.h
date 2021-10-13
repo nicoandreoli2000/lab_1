@@ -9,6 +9,13 @@ using namespace std;
 
 /*
  *  FUNCIÓN AUXILIAR
+PRE: Recibe un arbol.
+POS: Lo imprime para poder visualizar el recorrido (postorden, preorden, orden).
+*/
+void imprimirArbol(NodoAB* arbol);
+
+/*
+ *  FUNCIÓN AUXILIAR
 PRE: Recibe un arbol y un dato.
 POS: Si el dato del nodo coincide con el recibido, fija el arbol
 en NULL, de lo contrario lo fija hacia la izq o der dependiendo si es mayor o igual.

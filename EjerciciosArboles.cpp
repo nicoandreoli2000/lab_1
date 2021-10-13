@@ -2,6 +2,27 @@
 
 //Funciones auxiliares
 
+void imprimirArbolPar(NodoAB* arbol, int min, int max) {
+
+	if (arbol != NULL) {
+		if (arbol->dato < min) imprimirArbolPar(arbol->der, min, max);
+		else if (arbol->dato > max) imprimirArbolPar(arbol->izq, min, max);
+		else {
+			imprimirArbolPar(arbol->izq, min, max);
+			cout << arbol->dato << ' ';
+			imprimirArbolPar(arbol->der, min, max);
+		}
+	}
+}
+void imprimirArbol(NodoAB* arbol) {
+
+	if (arbol != NULL) {
+		imprimirArbol(arbol->der);
+		cout << arbol->dato << " -> ";
+		imprimirArbol(arbol->izq);
+	}
+}
+
 void auxCamino(NodoAB*& arbol, int x) {
 	if (x < arbol->dato) {
 		arbol = arbol->izq;
@@ -91,6 +112,8 @@ bool esArbolBalanceado(NodoAB* raiz) {
 
 
 NodoLista* enNivel(NodoAB* a, int k) {
+	cout << endl;
+	imprimirArbolPar(a, 3, 9);
 	// IMPLEMENTAR SOLUCION
 	return NULL;
 }
@@ -212,8 +235,12 @@ NodoLista* caminoAG(NodoAG* arbolGeneral, int dato) {
 	return NULL;
 }
 
-int nodosEnNivel(NodoAG* a) {
-	//if (a != NULL) return 1 + nodosEnNivel(a->sh)
+int nodosEnNivel(NodoAG* a, int k) {
+	if (a != NULL) {
+		if (k == 1) return 1;
+		else nodosEnNivel(a->ph, k - 1);
+		nodosEnNivel(a->sh, k);
+	}
 }
 
 int nivelConMasNodosAG(NodoAG* arbolGeneral) {
@@ -229,4 +256,5 @@ int nivelConMasNodosAG(NodoAG* arbolGeneral) {
 		}
 		bajoDeNivel(arbolGeneral);
 	}*/
+	return 0;
 }
