@@ -22,6 +22,13 @@ POS: Resuelve el ejericio sumaPorNiveles mediante recurrencia.
 */
 int auxSumaPorNiveles(NodoAG* raiz, int k);
 
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: Recibe un árbol ABB.
+POS: Elimina y retorna el menor dato del árbol.
+*/
+int obtenerYBorrarMenor(NodoAB*& a);
+
 
 // ----- EJERCICIOS -----
 

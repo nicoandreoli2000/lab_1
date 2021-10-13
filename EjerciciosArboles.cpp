@@ -1,6 +1,7 @@
 #include "EjerciciosArboles.h"
 
 //Funciones auxiliares
+
 void auxCamino(NodoAB*& arbol, int x) {
 	if (x < arbol->dato) {
 		arbol = arbol->izq;
@@ -20,7 +21,23 @@ int auxSumaPorNiveles(NodoAG* raiz, int k) {
 	else return raiz->dato + auxSumaPorNiveles(raiz->sh, k) + auxSumaPorNiveles(raiz->ph, k + 1);
 }
 
+int obtenerYBorrarMenor(NodoAB*& a) {
+	if (a->izq != NULL) {
+		obtenerYBorrarMenor(a->izq);
+	}
+	else {
+		int ret = a->dato;
+		NodoAB* borrar = a;
+		NodoAB* temp = a->der;
+		delete borrar;
+		a = temp;
+		return ret;
+	}
+}
+
+
 //Ejercicios
+
 int altura(NodoAB* raiz) {
 
 	if (raiz == NULL) return 0;
@@ -72,13 +89,19 @@ bool esArbolBalanceado(NodoAB* raiz) {
 	return abs(altura(raiz->der) - altura(raiz->izq)) <= 1 && esArbolBalanceado(raiz->der) && esArbolBalanceado(raiz->izq);
 }
 
+
 NodoLista* enNivel(NodoAB* a, int k) {
 	// IMPLEMENTAR SOLUCION
 	return NULL;
 }
 
 int cantNodosEntreNiveles(NodoAB* a, int desde, int hasta) {
-	// IMPLEMENTAR SOLUCION
+	/*if (a == NULL || hasta <= desde) return 0;
+
+	if (desde != 1) return cantNodosEntreNiveles(a->der, desde - 1, hasta) + cantNodosEntreNiveles(a->izq, desde-1, hasta);
+	
+	if (hasta != 1) return 1 + cantNodosEntreNiveles(a->der, desde, hasta - 1) + cantNodosEntreNiveles(a->izq, desde, hasta - 1);*/
+	
 	return 0;
 }
 
@@ -105,20 +128,6 @@ NodoAB* invertirHastak(NodoAB* a, int k) {
 	return NULL;
 }
 
-int obtenerYBorrarMenor(NodoAB*& a) {
-	if (a->izq != NULL) {
-		obtenerYBorrarMenor(a->izq);
-	}
-	else {
-		int ret = a->dato;
-		NodoAB* borrar = a;
-		NodoAB* temp = a->der;
-		delete borrar;
-		a = temp;
-		return ret;
-	}
-}
-
 void borrarNodoRaiz(NodoAB*& A) {
 	if (A->der == NULL) {
 		NodoAB* borrar = A;
@@ -139,10 +148,14 @@ bool sumaABB(NodoAB* a, int n)
 
 int sucesor(NodoAB* a, int n)
 {
-	/*if (a == NULL) return -1;
+	/*int sucesorMin = INT_MIN;
 
-	if (n > a->dato) return a->dato;
-	else return sucesor(a->izq, n);*/
+	while (a != NULL) {
+		if (a->dato <= n) {
+
+		}
+	}*/
+
 	return -1;
 }
 
@@ -199,7 +212,21 @@ NodoLista* caminoAG(NodoAG* arbolGeneral, int dato) {
 	return NULL;
 }
 
+int nodosEnNivel(NodoAG* a) {
+	//if (a != NULL) return 1 + nodosEnNivel(a->sh)
+}
+
 int nivelConMasNodosAG(NodoAG* arbolGeneral) {
-	// pend
-	return 0;
+	/*int maxNodos = 0;
+	int contador = 1;
+	int nivel;
+
+	while (arbolGeneral != NULL) {
+		int aux = nodosEnNivel(arbolGeneral);
+		if (aux > maxNodos) {
+			nivel = contador;
+			contador++;
+		}
+		bajoDeNivel(arbolGeneral);
+	}*/
 }
