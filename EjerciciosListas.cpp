@@ -117,9 +117,7 @@ void eliminarDato(NodoLista*& l, int dato) {
 	if (l == NULL) return;
 
 	if (l->dato == dato) {
-		NodoLista* aux = l->sig;
-		delete l;
-		l = aux;
+		borrarPpio(l);
 		eliminarDato(l, dato);
 	}
 }
@@ -143,14 +141,12 @@ bool haySecuenciaAlInicio(NodoLista* l, NodoLista* sec) {
 
 NodoLista* invertirParcial(NodoLista* l)
 {
-	NodoLista* copia = copiarLista(l);
-	borrarFinal(copia);
-
+	NodoLista* rec = l;
 	NodoLista* invertida = NULL;
 
-	while (copia != NULL) {
-		agregarPpio(invertida, copia->dato);
-		copia = copia->sig;
+	while (rec->sig != NULL) {
+		agregarPpio(invertida, rec->dato);
+		rec = rec->sig;
 	}
 
 	return invertida;
@@ -167,9 +163,7 @@ void eliminarNesimoDesdeElFinal(NodoLista*& lista, int& n)
 			eliminarNesimoDesdeElFinal(lista->sig, n);
 
 			if (n == 1) {
-				NodoLista* aux = lista->sig;
-				delete lista;
-				lista = aux;
+				borrarPpio(lista);
 			}
 
 			n--;
@@ -342,9 +336,7 @@ void eliminarSecuencia(NodoLista*& l, NodoLista* secuencia)
 
 	if (haySecuenciaAlInicio(l, secuencia)) {
 		while (secuencia != NULL) {
-			NodoLista* aux = l->sig;
-			delete l;
-			l = aux;
+			borrarPpio(l);
 			secuencia = secuencia->sig;
 		}
 	}

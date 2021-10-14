@@ -1,19 +1,6 @@
 #include "EjerciciosArboles.h"
 
 //Funciones auxiliares
-
-void imprimirArbolPar(NodoAB* arbol, int min, int max) {
-
-	if (arbol != NULL) {
-		if (arbol->dato < min) imprimirArbolPar(arbol->der, min, max);
-		else if (arbol->dato > max) imprimirArbolPar(arbol->izq, min, max);
-		else {
-			imprimirArbolPar(arbol->izq, min, max);
-			cout << arbol->dato << ' ';
-			imprimirArbolPar(arbol->der, min, max);
-		}
-	}
-}
 void imprimirArbol(NodoAB* arbol) {
 
 	if (arbol != NULL) {
@@ -112,8 +99,6 @@ bool esArbolBalanceado(NodoAB* raiz) {
 
 
 NodoLista* enNivel(NodoAB* a, int k) {
-	cout << endl;
-	imprimirArbolPar(a, 3, 9);
 	// IMPLEMENTAR SOLUCION
 	return NULL;
 }
@@ -171,15 +156,20 @@ bool sumaABB(NodoAB* a, int n)
 
 int sucesor(NodoAB* a, int n)
 {
-	/*int sucesorMin = INT_MIN;
-
-	while (a != NULL) {
-		if (a->dato <= n) {
-
+	if (a != NULL) {
+		if (a->dato < n) {
+			return sucesor(a->der, n);
 		}
-	}*/
-
-	return -1;
+		else if (a->dato > n) {
+			return min(a->dato, sucesor(a->izq, n));
+		}
+		else {
+			return min(sucesor(a->izq, n), sucesor(a->der, n));
+		}
+	}
+	else {
+		return INT_MAX;
+	}
 }
 
 int cantNodosEnNivel(NodoAB* a, int k) {
