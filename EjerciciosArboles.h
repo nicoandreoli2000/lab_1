@@ -36,6 +36,13 @@ POS: Elimina y retorna el menor dato del árbol.
 */
 int obtenerYBorrarMenor(NodoAB*& a);
 
+/*
+ *  FUNCIÓN AUXILIAR
+PRE: Dados dos enteros a y b.
+POS: Si uno de ellos es -1, retorna el máximo de ambos, sino retorna el mínimo de ambos.
+*/
+int auxSucesor(int a, int b);
+
 
 // ----- EJERCICIOS -----
 

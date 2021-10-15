@@ -43,6 +43,15 @@ int obtenerYBorrarMenor(NodoAB*& a) {
 	}
 }
 
+int auxSucesor(int a, int b) {
+	if (a == -1 || b == -1) {
+		return max(a, b);
+	}
+	else {
+		return min(a, b);
+	}
+}
+
 
 //Ejercicios
 
@@ -104,12 +113,7 @@ NodoLista* enNivel(NodoAB* a, int k) {
 }
 
 int cantNodosEntreNiveles(NodoAB* a, int desde, int hasta) {
-	/*if (a == NULL || hasta <= desde) return 0;
-
-	if (desde != 1) return cantNodosEntreNiveles(a->der, desde - 1, hasta) + cantNodosEntreNiveles(a->izq, desde-1, hasta);
-	
-	if (hasta != 1) return 1 + cantNodosEntreNiveles(a->der, desde, hasta - 1) + cantNodosEntreNiveles(a->izq, desde, hasta - 1);*/
-	
+	// IMPLEMENTAR SOLUCION
 	return 0;
 }
 
@@ -157,18 +161,15 @@ bool sumaABB(NodoAB* a, int n)
 int sucesor(NodoAB* a, int n)
 {
 	if (a != NULL) {
-		if (a->dato < n) {
+		if (a->dato <= n) {
 			return sucesor(a->der, n);
 		}
-		else if (a->dato > n) {
-			return min(a->dato, sucesor(a->izq, n));
-		}
 		else {
-			return min(sucesor(a->izq, n), sucesor(a->der, n));
+			return auxSucesor(a->dato, sucesor(a->izq, n));
 		}
 	}
 	else {
-		return INT_MAX;
+		return -1;
 	}
 }
 
