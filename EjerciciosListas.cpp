@@ -88,31 +88,6 @@ void insertarOrdenado(NodoLista*& l, int dato) {
 	}
 }
 
-void intercalarAux(NodoLista*& l1, NodoLista*& l2, NodoLista*& res) {
-
-	if (l1 == NULL && l2 == NULL) return;
-
-	if (l1 != NULL && l2 != NULL) {
-
-		if (l1->dato < l2->dato) {
-			intercalarAux(l1->sig, l2, res);
-			agregarPpio(res, l1->dato);
-		}
-		else {
-			intercalarAux(l1, l2->sig, res);
-			agregarPpio(res, l2->dato);
-		}
-	}
-	else if (l2 != NULL) {
-		intercalarAux(l1, l2->sig, res);
-		agregarPpio(res, l2->dato);
-	}
-	else {
-		intercalarAux(l1->sig, l2, res);
-		agregarPpio(res, l1->dato);
-	}
-}
-
 void eliminarDato(NodoLista*& l, int dato) {
 	if (l == NULL) return;
 
@@ -148,6 +123,7 @@ NodoLista* invertirParcial(NodoLista* l)
 		agregarPpio(invertida, rec->dato);
 		rec = rec->sig;
 	}
+
 
 	return invertida;
 }
@@ -244,11 +220,33 @@ NodoLista* intercalarIter(NodoLista* l1, NodoLista* l2)
 
 NodoLista* intercalarRec(NodoLista* l1, NodoLista* l2)
 {
-	NodoLista* res = NULL;
+	if (l1 == NULL && l2 == NULL) return NULL;
 
-	intercalarAux(l1, l2, res);
+	NodoLista* res;
 
-	return res;
+	if (l1 != NULL && l2 != NULL) {
+
+		if (l1->dato < l2->dato) {
+			res = new NodoLista(l1->dato);
+			res->sig = intercalarRec(l1->sig, l2);
+			return res;
+		}
+		else {
+			res = new NodoLista(l2->dato);
+			res->sig = intercalarRec(l1, l2->sig);
+			return res;
+		}
+	}
+	else if (l2 != NULL) {
+		res = new NodoLista(l2->dato);
+		res->sig = intercalarRec(l1, l2->sig);
+		return res;
+	}
+	else {
+		res = new NodoLista(l1->dato);
+		res->sig = intercalarRec(l1->sig, l2);
+		return res;
+	}
 }
 
 NodoLista* insComFin(NodoLista* l, int x)

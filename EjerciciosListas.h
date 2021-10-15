@@ -73,13 +73,6 @@ void insertarOrdenado(NodoLista*& l, int dato);
 
 /*
  *  FUNCIÓN AUXILIAR
-PRE: Recibe dos listas ordenadas y una lista vacía.
-POS: Intercala las listas dentro de la vacía de manera que quede ordenada (por recurrencia).
-*/
-void intercalarAux(NodoLista*& l1, NodoLista*& l2, NodoLista*& res);
-
-/*
- *  FUNCIÓN AUXILIAR
 PRE: Recibe una lista ordenada y el dato con el que comienza (l->dato).
 POS: Elimina todas las ocurrencias del dato recibido (sabemos que las ocurrencias están todas juntas al principio
 	 porque la lista está ordenada).
