@@ -171,9 +171,11 @@ int sucesor(NodoAB* a, int n)
 		if (a->dato <= n) {
 			return sucesor(a->der, n);
 		}
-		if (a->izq != NULL) {
-			return sucesor(a->izq, n);
-		}
+
+		int suc = sucesor(a->izq, n);
+		
+		if (suc != -1) return suc;
+		
 		return a->dato;
 	}
 
