@@ -52,6 +52,13 @@ int auxSucesor(int a, int b) {
 	}
 }
 
+int nodosEnNivel(NodoAG* a, int k) {
+	if (a != NULL) {
+		if (k == 1) return 1 + nodosEnNivel(a->sh, k);
+		return nodosEnNivel(a->ph, k - 1) + nodosEnNivel(a->sh, k);
+	}
+	return 0;
+}
 
 //Ejercicios
 
@@ -164,13 +171,13 @@ int sucesor(NodoAB* a, int n)
 		if (a->dato <= n) {
 			return sucesor(a->der, n);
 		}
-		else {
-			return auxSucesor(a->dato, sucesor(a->izq, n));
+		if (a->izq != NULL) {
+			return sucesor(a->izq, n);
 		}
+		return a->dato;
 	}
-	else {
-		return -1;
-	}
+
+	return -1;
 }
 
 int cantNodosEnNivel(NodoAB* a, int k) {
@@ -217,50 +224,32 @@ int sumaPorNiveles(NodoAG* raiz) {
 
 bool esPrefijo(NodoAG* a, NodoLista* l)
 {
-	// pend
-	return false;
+	if (l == NULL) return true;
+
+	if (a == NULL) return false;
+
+	if (a->dato == l->dato) return esPrefijo(a->ph, l->sig);
+	else return esPrefijo(a->sh, l) || esPrefijo(a->ph, l);
 }
 
 
 NodoLista* caminoAG(NodoAG* arbolGeneral, int dato) {
 
-	/*if (arbolGeneral != NULL) {
-		if (arbolGeneral->dato < dato) {
-			NodoLista* res = new NodoLista(arbolGeneral->dato);
-			NodoLista* aux = caminoAG(arbolGeneral->ph, dato);
+	if (arbolGeneral != NULL) {
 
-			if (aux == NULL) {
-				aux = caminoAG(arbolGeneral->sh, dato);
-			}
-			if (aux != NULL) {
-				res->sig = aux;
-				return res;
-			}
-			else {
-				return NULL;
-			}
-		}
-		else if (arbolGeneral->dato > dato) {
-			return NULL;
-		}
-		else {
-			NodoLista* res = new NodoLista(arbolGeneral->dato);
-			res->sig = caminoAG(arbolGeneral->sh, dato);;
-			return res;
-		}
-	}*/
+		if (arbolGeneral->dato == dato) return new NodoLista(arbolGeneral->dato);
 
-	return NULL;
-}
+		NodoLista* camino = caminoAG(arbolGeneral->ph, dato);
 
-int nodosEnNivel(NodoAG* a, int k) {
-	if (a != NULL) {
-		if (k == 1) return 1 + nodosEnNivel(a->sh, k);
-		
-		return nodosEnNivel(a->ph, k-1) + nodosEnNivel(a->sh, k);
+		if (camino == NULL) return caminoAG(arbolGeneral->sh, dato);
+
+		NodoLista* aux = new NodoLista(arbolGeneral->dato);
+		aux->sig = camino;
+		return aux;
 	}
 
-	return 0;
+	return NULL;
+
 }
 
 int nivelConMasNodosAG(NodoAG* arbolGeneral) {
