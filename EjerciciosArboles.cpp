@@ -221,31 +221,62 @@ bool esPrefijo(NodoAG* a, NodoLista* l)
 	return false;
 }
 
+
 NodoLista* caminoAG(NodoAG* arbolGeneral, int dato) {
-	// pend
+
+	/*if (arbolGeneral != NULL) {
+		if (arbolGeneral->dato < dato) {
+			NodoLista* res = new NodoLista(arbolGeneral->dato);
+			NodoLista* aux = caminoAG(arbolGeneral->ph, dato);
+
+			if (aux == NULL) {
+				aux = caminoAG(arbolGeneral->sh, dato);
+			}
+			if (aux != NULL) {
+				res->sig = aux;
+				return res;
+			}
+			else {
+				return NULL;
+			}
+		}
+		else if (arbolGeneral->dato > dato) {
+			return NULL;
+		}
+		else {
+			NodoLista* res = new NodoLista(arbolGeneral->dato);
+			res->sig = caminoAG(arbolGeneral->sh, dato);;
+			return res;
+		}
+	}*/
+
 	return NULL;
 }
 
 int nodosEnNivel(NodoAG* a, int k) {
 	if (a != NULL) {
-		if (k == 1) return 1;
-		else nodosEnNivel(a->ph, k - 1);
-		nodosEnNivel(a->sh, k);
+		if (k == 1) return 1 + nodosEnNivel(a->sh, k);
+		
+		return nodosEnNivel(a->ph, k-1) + nodosEnNivel(a->sh, k);
 	}
+
+	return 0;
 }
 
 int nivelConMasNodosAG(NodoAG* arbolGeneral) {
-	/*int maxNodos = 0;
-	int contador = 1;
-	int nivel;
+	int nivelActual = 1;
+	int nivelMax = 0;
+	int nodosMax = 0;
+	int condicion = 1;
 
-	while (arbolGeneral != NULL) {
-		int aux = nodosEnNivel(arbolGeneral);
-		if (aux > maxNodos) {
-			nivel = contador;
-			contador++;
+	while (condicion > 0) {
+		condicion = nodosEnNivel(arbolGeneral, nivelActual);
+		if (condicion > nodosMax) {
+			nodosMax = condicion;
+			nivelMax = nivelActual;
 		}
-		bajoDeNivel(arbolGeneral);
-	}*/
-	return 0;
+		nivelActual++;
+	}
+
+	return nivelMax;
 }
